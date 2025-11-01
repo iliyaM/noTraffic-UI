@@ -1,0 +1,59 @@
+@use "sass:color";
+@use "../colors" as colors;
+
+section.main {
+  position: relative;
+  display: flex;
+  width: 100vw;
+  height: 100vh;
+
+  div.overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+
+    width: 100%;
+    height: 100%;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    background-color: color.adjust(colors.$primary-text-color, $alpha: -0.1);
+
+    box-sizing: border-box;
+    padding: 350px;
+
+    svg {
+      position: absolute;
+      top: 30px;
+      left: 30px;
+
+      width: 50px;
+      height: 50px;
+      stroke: colors.$white-color;
+      transition: all 0.3s;
+
+      &:hover {
+        cursor: pointer;
+        transform: scale(1.1);
+      }
+    }
+  }
+}
+
+.fade-animation {
+  animation: fade 0.5s;
+}
+
+@keyframes fade {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+

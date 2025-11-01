@@ -1,0 +1,86 @@
+<section class="polygon-playground">
+
+<!-- SIDE MENU WITH CREATED POLYGONS -->
+  <aside>
+    <p class="list-title">Polygons: </p>
+    <ul class="polygons">
+      @for (polygon of polygons; track polygon.id) {
+        <li>
+          <div class="container">
+
+            <button class="polygon-name"
+                    (click)="setPolygonActive(polygon)"
+                    (mouseenter)="onHoverPolygon(polygon.id)"
+                    (mouseleave)="onLeavePolygon()">
+              {{ polygon.name }}
+            </button>
+
+            <app-custom-icons
+              [name]="'trash'"
+              [size]="25"
+              (mouseenter)="onHoverPolygon(polygon.id)"
+              (mouseleave)="onLeavePolygon()"
+              (click)="deletePolygon(polygon); $event.stopPropagation()">
+            </app-custom-icons>
+
+          </div>
+        </li>
+      }
+    </ul>
+    <button class="finish-button" (click)="finishPolygonDrawing()" [disabled]="drawingPoints.length < 3"> Finish Polygon</button>
+  </aside>
+
+  <!-- RENDER STAGE -->
+  <div class="render" #renderStage>
+    <ko-stage [config]="configStage" (click)="onStageClick($event)">
+
+      <!-- Background -->
+      <ko-layer>
+        <ko-image [config]="bgImageConfig"></ko-image>
+      </ko-layer>
+
+      <!-- Loaded polygons -->
+      <ko-layer>
+        <!-- Lines -->
+        @for (polygon of polygons; track polygon.id) {
+          <ko-line
+            [config]="{
+              points: polygon.points.flat(),
+              closed: true,
+              stroke: polygon.id === highlightedId ? '#FF9F1C' : '#4F7CAC',
+              strokeWidth: polygon.id === highlightedId ? 4 : 2
+            }">
+          </ko-line>
+        }
+
+        <!-- Vertices -->
+        @for (point of drawingPoints; track point; let index = $index) {
+          <ko-circle
+            [config]="{
+              x: point[0],
+              y: point[1],
+              radius: workingPolygonId ? (index === drawingPoints.length - 1 ? 6 : 4) : (index === 0 ? 6 : 4),
+              fill: workingPolygonId ? (index === drawingPoints.length - 1 ? 'red' : 'orange') : (index === 0 ? 'red' : 'orange'),
+              stroke: 'red',
+              strokeWidth: 1
+            }"
+          ></ko-circle>
+        }
+
+      </ko-layer>
+
+      <!-- Live drawing preview -->
+      <ko-layer>
+        @if (drawingPoints.length) {
+          <ko-line
+            [config]="{
+            points: drawingPoints.flat(),
+            stroke: '#4F7CAC',
+            strokeWidth: 2
+          }">
+          </ko-line>
+        }
+      </ko-layer>
+    </ko-stage>
+  </div>
+</section>

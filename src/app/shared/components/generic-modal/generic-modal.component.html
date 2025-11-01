@@ -1,0 +1,26 @@
+
+@if (modalType === 'LOADING') {
+  <div class="loading-container">
+    <div class="spinner"></div>
+    <p>{{ message ?? 'Loading please wait ...' }}</p>
+  </div>
+}
+
+@if (modalType === 'SUCCESS') {
+  <div class="modal-container success">
+
+    <app-custom-icons [name]="'success'" [size]="35"></app-custom-icons>
+
+    <p>{{ message ?? 'No message provided' }}</p>
+    <button (click)="modalService.close()"> Close </button>
+  </div>
+}
+
+@if (modalType === 'ERROR') {
+  <div class="modal-container error">
+    <app-custom-icons [name]="'error'" [size]="32"></app-custom-icons>
+
+    <p>{{ message ?? 'No message provided' }}</p>
+    <button (click)="modalService.close()"> Close </button>
+  </div>
+}

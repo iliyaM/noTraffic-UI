@@ -1,0 +1,16 @@
+<section class="main">
+
+
+  <router-outlet></router-outlet>
+
+  <!--  FULL APPLICATION MODAL -->
+  @if (genericModalService.modalState().isOpen) {
+    <div class="overlay fade-animation">
+
+      <app-generic-modal
+        [message]="genericModalService.modalState().message"
+        [modalType]="genericModalService.modalState().type"
+      ></app-generic-modal>
+    </div>
+  }
+</section>

@@ -1,0 +1,68 @@
+@use "../../../../colors" as colors;
+@use "../../../../mixins" as mixins;
+
+div.modal-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  box-sizing: border-box;
+  padding: 35px 15px 15px 15px;
+
+  width: 450px;
+  border-radius: 10px;
+
+  background-color: colors.$white-color;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+
+  p {
+    margin: 0;
+    color: colors.$primary-text-color;
+    font-size: 1.5em;
+    text-align: center;
+    padding: 1em 0;
+  }
+
+  svg {
+    border-radius: 100%;
+    padding: 10px;
+  }
+
+  button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    @include mixins.button(colors.$light-color, colors.$primary-text-color);
+    font-weight: bold;
+    width: 150px;
+  }
+}
+
+div.loading-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  p {
+    margin: 0;
+    color: colors.$white-color;
+    font-size: 1.5em;
+  }
+}
+
+div.spinner {
+  width: 50px;
+  height: 50px;
+  border: 5px solid colors.$border-color;
+  border-top-color: colors.$error-color;
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+  margin-bottom: 1em;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}

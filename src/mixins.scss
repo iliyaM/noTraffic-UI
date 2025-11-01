@@ -1,0 +1,38 @@
+@use "colors" as colors;
+
+// Default fallback
+@mixin button($bg: #1db954, $color: #fff) {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  gap: 8px;
+  padding: 10px 16px;
+  border: none;
+  border-radius: 5px;
+
+  cursor: pointer;
+  background-color: $bg;
+  color: $color;
+
+  transition: all 0.3s;
+
+
+  &:hover {
+    cursor: pointer;
+    transform: scale(1.1);
+  }
+
+  p {
+    margin: 0;
+    font-weight: bold;
+    font-size: 1.1em;
+  }
+
+  i,
+  svg {
+    font-size: 1.2rem;
+    display: inline-block;
+  }
+}
+
